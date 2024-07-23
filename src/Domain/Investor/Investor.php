@@ -2,12 +2,15 @@
 
 namespace LendInvest\Domain;
 
+use LendInvest\Domain\Wallet;
+use LendInvest\Domain\Investment;
+
 class Investor
 {
     protected int $id;
     protected string $investorName;
     protected Wallet $wallet;
-    //TOOD: Add Loan associations
+    protected ?array $investments;
 
     public function __construct(
         int $id,
@@ -79,6 +82,27 @@ class Investor
     public function setWallet(Wallet $wallet): self
     {
         $this->wallet = $wallet;
+
+        return $this;
+    }
+
+    /**
+     * Get Investor Investments
+     * @return array|Investment[]|null
+     */
+    public function getInvestments(): ?array
+    {
+        return $this->investments;
+    }
+
+    /**
+     * Set Investors Investments
+     * @param Array|Investment[]|null $investments
+     * @return Investor
+     */
+    public function setInvestments($investments): self
+    {
+        $this->investments = $investments;
 
         return $this;
     }
