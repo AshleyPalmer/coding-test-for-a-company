@@ -15,17 +15,9 @@ class Investment extends Loan
     protected DateTime $startDate;
     protected Money $investedAmount;
 
-    public function __construct(Loan $loan, string $trancheName, DateTime|null $startDate, Money $investedAmount)
+    public function __construct(Loan $loan)
     {
-        parent::__construct(
-            $loan->startDate,
-            $loan->endDate,
-            $loan->tranches
-        );
-
-        $this->startDate = $startDate ?: new DateTime('now');
-        $this->trancheName = $trancheName;
-        $this->investedAmount = $investedAmount;
+        parent::__construct($loan->id, $loan->startDate, $loan->endDate);
     }
 
     /**
@@ -82,6 +74,19 @@ class Investment extends Loan
     public function getLoan(): Loan
     {
         return $this->loan;
+    }
+
+    /**
+     * Set Investment Loan
+     * 
+     * @param  Loan $loan
+     * @return Investment
+     */
+    public function setLoan(Loan $loan): self
+    {
+        $this->loan = $loan;
+
+        return $this;
     }
 
     /**
