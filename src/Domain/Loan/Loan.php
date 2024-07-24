@@ -106,10 +106,11 @@ class Loan
 
     public function getTrancheByName(string $name): Tranche
     {
-        $tranches = $this->getTranches();
-
-        if (isset($tranches[$name])) {
-            return $tranches[$name];
+        /** @var Tranche $tranche */
+        foreach ($this->getTranches() as $tranche) {
+            if ($tranche->getName() === $name) {
+                return $tranche;
+            }
         }
 
         throw new InvalidArgumentException(sprintf('No Tranche with the name $s has been found.', $name));

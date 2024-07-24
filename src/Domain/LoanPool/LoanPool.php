@@ -18,12 +18,15 @@ class LoanPool
 
     public function getLoanById(string $id): Loan
     {
-        if (isset($this->loans[$id])) {
-            return $this->loans[$id];
+        /** @var Loan $loan */
+        foreach ($this->loans as $loan) {
+            if ($loan->getId() === $id) {
+                return $loan;
+            }
         }
 
         throw new InvalidArgumentException(
-            sprintf('No Loan with the ID $d exists.', $id)
+            sprintf('No Loan with the ID $s exists.', $id)
         );
     }
 
