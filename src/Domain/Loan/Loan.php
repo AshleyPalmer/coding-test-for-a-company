@@ -1,8 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LendInvest\Domain;
 
 use DateTime;
+use InvalidArgumentException;
 use LendInvest\Domain\Tranche;
 
 class Loan
@@ -98,9 +101,20 @@ class Loan
      * 
      * @return array|Tranche[]|null
      */
-    public function getTranches(): ?array
+    private function getTranches(): ?array
     {
         return $this->tranches;
+    }
+
+    public function getTrancheByName(string $name): Tranche
+    {
+        $tranches = $this->getTranches();
+
+        if (isset($tranches[$name])) {
+            return $tranches[$name];
+        }
+
+        throw new InvalidArgumentException(sprintf('No Tranche with the name $s has been found.', $name));
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LendInvest\Domain;
 
 use Money\Money;
@@ -18,8 +20,8 @@ class EarnedInterestCalculator
     public function getEarnedInterestAmount(Money $investment, int|float $interestRate): Money
     {
         $amount = $investment->getAmount();
-        $earnedAmount = ($amount / 100) * $interestRate;
+        $earnedAmount = (($amount / 100) * $interestRate);
 
-        return new Money(round($earnedAmount, 2), new Currency('GBP'));
+        return new Money(number_format($earnedAmount, 2, '.', ''), new Currency('GBP'));
     }
 }

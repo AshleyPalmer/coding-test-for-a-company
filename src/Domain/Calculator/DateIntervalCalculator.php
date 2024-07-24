@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace LendInvest\Domain;
 
 use DateTime;
@@ -22,6 +24,6 @@ class DateIntervalCalculator
          */
         $endDate->modify('+1 day');
 
-        return $startDate->diff($endDate)->format('%a');
+        return (int) $startDate->diff($endDate)->format('%a');
     }
 }
