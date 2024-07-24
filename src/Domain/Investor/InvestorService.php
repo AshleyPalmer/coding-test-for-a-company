@@ -51,6 +51,9 @@ class InvestorService
                 $trancheService->hasAmountToInvest($amount)
                 && $walletService->hasBalanceToInvest($amount)
             ) {
+                $trancheService->deductFromTranche($amount);
+                $walletService->deductFromWallet($amount);
+
                 $investment = (new Investment($loan))
                     ->setStartDate($investDate)
                     ->setTrancheName($tranche->getName())
@@ -59,7 +62,7 @@ class InvestorService
                 return $investment;
             }
         } catch (Throwable $e) {
-            throw $e->getMessage();
+            throw $e;
         }
     }
 }
