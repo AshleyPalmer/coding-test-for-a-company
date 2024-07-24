@@ -101,7 +101,7 @@ class Loan
      * 
      * @return array|Tranche[]|null
      */
-    private function getTranches(): ?array
+    public function getTranches(): ?array
     {
         return $this->tranches;
     }
