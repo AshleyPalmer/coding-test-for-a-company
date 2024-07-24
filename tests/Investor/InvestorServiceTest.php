@@ -11,20 +11,26 @@ use LendInvest\CodingTest\Domain\Wallet\Wallet;
 use LendInvest\CodingTest\Domain\Tranche\Tranche;
 use LendInvest\CodingTest\Domain\Investor\Investor;
 use LendInvest\CodingTest\Domain\LoanPool\LoanPool;
-use PHPUnit\Framework\MockObject\Generator\MockType;
 use LendInvest\CodingTest\Domain\Investment\Investment;
 use LendInvest\CodingTest\Domain\Investor\InvestorService;
 
 class InvestorServiceTest extends TestCase
 {
+    protected Investor $investor1;
+    protected Investor $investor2;
+    protected Investor $investor3;
+    protected Investor $investor4;
+    protected Loan $loan;
+    protected LoanPool $loanPool;
 
-    #[Test]
-    public function test_can_create_investment()
+    public function setUp(): void
     {
-        $investor = (new Investor('Investor 1'))->setWallet(new Wallet('1000'));
-        $investor3 = (new Investor('Investor 3'))->setWallet(new Wallet('1000'));
+        $this->investor1 = (new Investor('Investor 1'))->setWallet(new Wallet('1000'));
+        $this->investor2 = (new Investor('Investor 2'))->setWallet(new Wallet('1000'));
+        $this->investor3 = (new Investor('Investor 3'))->setWallet(new Wallet('1000'));
+        $this->investor4 = (new Investor('Investor 4'))->setWallet(new Wallet('1000'));
 
-        $loan = (new Loan(
+        $this->loan = (new Loan(
             'loan',
             DateTime::createFromFormat('d/m/Y', '01/10/2023'),
             DateTime::createFromFormat('d/m/Y', '15/11/2023')
@@ -39,82 +45,114 @@ class InvestorServiceTest extends TestCase
             ]
         );
 
-        $loanPool = new LoanPool([$loan]);
+        $this->loanPool = new LoanPool([$this->loan]);
+    }
 
-        $investorService = new InvestorService($investor);
+
+    #[Test]
+    public function test_can_create_investments()
+    {
+        $investorService = new InvestorService($this->investor1);
         $investment = $investorService->createInvestment(
             new Money('1000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
             Tranche::TRANCHE_A,
-            $loan->getId(),
-            $loanPool
+            $this->loan->getId(),
+            $this->loanPool
         );
 
         $this->assertInstanceOf(Investment::class, $investment);
 
-        $investorService = new InvestorService($investor3);
+        $investorService = new InvestorService($this->investor3);
         $investment = $investorService->createInvestment(
             new Money('500', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '10/10/2023'),
             Tranche::TRANCHE_B,
-            $loan->getId(),
-            $loanPool
+            $this->loan->getId(),
+            $this->loanPool
         );
 
+        $mockZeroMoney = new Money('0', new Currency('GBP'));
+        $mockHalfMoney = new Money('500', new Currency('GBP'));
+
         $this->assertInstanceOf(Investment::class, $investment);
-        //TODO: Assert investor 1 has no money, and tranche A has no money
-        //TODO: Assert investor 2 has 500, and tranche B has 500
+        $this->assertEquals($mockZeroMoney, $this->investor1->getWallet()->getAmount());
+        $this->assertEquals(
+            $mockZeroMoney,
+            $this->loan->getTrancheByName(Tranche::TRANCHE_A)->getAvailableInvestment()
+        );
+
+        $this->assertEquals($mockHalfMoney, $this->investor3->getWallet()->getAmount());
+        $this->assertEquals(
+            $mockHalfMoney,
+            $this->loan->getTrancheByName(Tranche::TRANCHE_B)->getAvailableInvestment()
+        );
     }
 
     #[Test]
     public function test_should_not_allow_excessive_investment()
     {
-        $investor1 = (new Investor('Investor 1'))->setWallet(new Wallet('1000'));
-        $investor2 = (new Investor('Investor 2'))->setWallet(new Wallet('1000'));
-
-        $loan = (new Loan(
-            'loan',
-            DateTime::createFromFormat('d/m/Y', '01/10/2023'),
-            DateTime::createFromFormat('d/m/Y', '15/11/2023')
-        ))->setTranches(
-            [
-                (new Tranche(Tranche::TRANCHE_A))
-                    ->setInterestRate(3)
-                    ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
-                (new Tranche(Tranche::TRANCHE_B))
-                    ->setInterestRate(6)
-                    ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
-            ]
-        );
-
-        $loanPool = new LoanPool([$loan]);
-
-        $investorService = new InvestorService($investor1);
-        $investment1 = $investorService->createInvestment(
+        $investorService = new InvestorService($this->investor1);
+        $investment = $investorService->createInvestment(
             new Money('1000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
             Tranche::TRANCHE_A,
-            $loan->getId(),
-            $loanPool
+            $this->loan->getId(),
+            $this->loanPool
         );
 
-        $this->assertInstanceOf(Investment::class, $investment1);
+        $this->assertInstanceOf(Investment::class, $investment);
 
-        $investorService = new InvestorService($investor2);
+        $investorService = new InvestorService($this->investor2);
 
-        $this->expectException(InvalidArgumentException::class);
-        $investorService->createInvestment(
-            new Money('1', new Currency('GBP')),
-            DateTime::createFromFormat('d/m/Y', '04/10/2023'),
-            Tranche::TRANCHE_A,
-            $loan->getId(),
-            $loanPool
-        );
+        try {
+            $investmentAttempt = $investorService->createInvestment(
+                new Money('1', new Currency('GBP')),
+                DateTime::createFromFormat('d/m/Y', '04/10/2023'),
+                Tranche::TRANCHE_A,
+                $this->loan->getId(),
+                $this->loanPool
+            );
+        } catch (InvalidArgumentException $e) {
+            $this->assertInstanceOf(InvalidArgumentException::class, $e);
+        } finally {
+            $this->assertNotInstanceOf(Investment::class, $investmentAttempt);
+            $this->assertEquals(
+                new Money('1000', new Currency('GBP')),
+                $this->investor2->getWallet()->getAmount()
+            );
+            $this->assertEquals(
+                new Money('0', new Currency('GBP')),
+                $this->loan->getTrancheByName(Tranche::TRANCHE_A)->getAvailableInvestment()
+            );
+        }
     }
 
     #[Test]
     public function test_should_not_allow_negative_funds()
     {
-        // Test
+        $investorService = new InvestorService($this->investor4);
+
+        try {
+            $investment = $investorService->createInvestment(
+                new Money('1100', new Currency('GBP')),
+                DateTime::createFromFormat('d/m/Y', '25/10/2023'),
+                Tranche::TRANCHE_B,
+                $this->loan->getId(),
+                $this->loanPool
+            );
+        } catch (InvalidArgumentException $e) {
+            $this->assertInstanceOf(InvalidArgumentException::class, $e);
+        } finally {
+            $this->assertNotInstanceOf(Investment::class, $investment);
+            $this->assertEquals(
+                new Money('1000', new Currency('GBP')),
+                $this->investor4->getWallet()->getAmount()
+            );
+            $this->assertEquals(
+                new Money('1000', new Currency('GBP')),
+                $this->loan->getTrancheByName(Tranche::TRANCHE_B)->getAvailableInvestment()
+            );
+        }
     }
 }

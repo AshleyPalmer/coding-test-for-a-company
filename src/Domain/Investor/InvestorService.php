@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace LendInvest\CodingTest\Domain\Investor;
 
 use DateTime;
-use Throwable;
 use Money\Money;
+use InvalidArgumentException;
 use LendInvest\CodingTest\Domain\Investor\Investor;
 use LendInvest\CodingTest\Domain\LoanPool\LoanPool;
 use LendInvest\CodingTest\Domain\Wallet\WalletService;
@@ -55,13 +55,13 @@ class InvestorService
                 $walletService->deductFromWallet($amount);
 
                 $investment = (new Investment($loan))
-                    ->setStartDate($investDate)
+                    ->setinvestmentStartDate($investDate)
                     ->setTrancheName($tranche->getName())
                     ->setInvestedAmount($amount);
 
                 return $investment;
             }
-        } catch (Throwable $e) {
+        } catch (InvalidArgumentException $e) {
             throw $e;
         }
     }
