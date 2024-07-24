@@ -4,8 +4,19 @@ declare(strict_types=1);
 
 namespace LendInvest\Domain;
 
+use LendInvest\Domain\Investor;
+use LendInvest\Domain\WalletService;
+use LendInvest\Domain\TrancheService;
+
 class InvestorService
 {
+    public function __construct(
+        private Investor $investor,
+        private WalletService $walletService,
+        private TrancheService $trancheService
+    ) {
+    }
+
     public function createInvestment()
     {
         /**
