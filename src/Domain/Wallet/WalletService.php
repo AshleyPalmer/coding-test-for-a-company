@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LendInvest\Domain;
+namespace LendInvest\CodingTest\Domain\Wallet;
 
 use Exception;
 use Money\Money;
-use LendInvest\Domain\Wallet;
+use LendInvest\CodingTest\Domain\Wallet\Wallet;
 
 class WalletService
 {

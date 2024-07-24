@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace LendInvest\Domain;
+namespace LendInvest\CodingTest\Domain\Loan;
 
 use Exception;
 use Money\Money;
-use LendInvest\Domain\Loan;
 use InvalidArgumentException;
+use LendInvest\CodingTest\Domain\Loan\Loan;
+use LendInvest\CodingTest\Domain\Tranche\Tranche;
 
 class LoanService
 {

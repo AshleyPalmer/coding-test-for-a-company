@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LendInvest\Domain;
+namespace LendInvest\CodingTest\Domain\Tranche;
 
 use Exception;
 use Money\Money;
-use LendInvest\Domain\Tranche;
+use LendInvest\CodingTest\Domain\Tranche\Tranche;
 
 class TrancheService
 {

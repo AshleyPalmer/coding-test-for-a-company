@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LendInvest\Domain;
+namespace LendInvest\CodingTest\Domain\Investor;
 
-use LendInvest\Domain\Investor;
-use LendInvest\Domain\WalletService;
-use LendInvest\Domain\TrancheService;
+use LendInvest\CodingTest\Domain\Investor\Investor;
+use LendInvest\CodingTest\Domain\Wallet\WalletService;
+use LendInvest\CodingTest\Domain\Tranche\TrancheService;
 
 class InvestorService
 {

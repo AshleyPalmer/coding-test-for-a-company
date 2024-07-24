@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace LendInvest\Domain;
+namespace LendInvest\CodingTest\Domain\Tranche;
 
 use Money\Money;
 

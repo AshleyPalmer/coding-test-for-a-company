@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace LendInvest\Domain;
+namespace LendInvest\CodingTest\Domain\Investment;
 
 use DateTime;
 use Money\Money;
-use LendInvest\Domain\Loan;
+use LendInvest\CodingTest\Domain\Loan\Loan;
 
 class Investment extends Loan
 {
@@ -18,7 +18,6 @@ class Investment extends Loan
     public function __construct(Loan $loan, string $trancheName, DateTime|null $startDate, Money $investedAmount)
     {
         parent::__construct(
-            $loan->id,
             $loan->startDate,
             $loan->endDate,
             $loan->tranches

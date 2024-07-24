@@ -2,14 +2,15 @@
 
 declare(strict_types=1);
 
-namespace LendInvest\Domain;
+namespace LendInvest\CodingTest\Domain\Investment;
 
 use DateTime;
 use Money\Money;
-use LendInvest\Domain\Investment;
-use LendInvest\Domain\DateIntervalCalculator;
-use LendInvest\Domain\InterestRateCalculator;
-use LendInvest\Domain\EarnedInterestCalculator;
+use LendInvest\CodingTest\Domain\Tranche\Tranche;
+use LendInvest\CodingTest\Domain\Investment\Investment;
+use LendInvest\CodingTest\Domain\Calculator\DateIntervalCalculator;
+use LendInvest\CodingTest\Domain\Calculator\InterestRateCalculator;
+use LendInvest\CodingTest\Domain\Calculator\EarnedInterestCalculator;
 
 class InvestmentService
 {
