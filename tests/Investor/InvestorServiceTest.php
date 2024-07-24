@@ -51,4 +51,56 @@ class InvestorServiceTest extends TestCase
 
         $this->assertInstanceOf(Investment::class, $investment);
     }
+
+    #[Test]
+    public function test_should_not_allow_excessive_investment()
+    {
+        $investor1 = (new Investor('Investor 1'))->setWallet(new Wallet('1000'));
+        $investor2 = (new Investor('Investor 2'))->setWallet(new Wallet('1000'));
+
+        $loan = (new Loan(
+            'loan',
+            DateTime::createFromFormat('d/m/Y', '01/10/2023'),
+            DateTime::createFromFormat('d/m/Y', '15/11/2023')
+        ))->setTranches(
+            [
+                (new Tranche('A'))
+                    ->setInterestRate(3)
+                    ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
+                (new Tranche('B'))
+                    ->setInterestRate(6)
+                    ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
+            ]
+        );
+
+        $loanPool = new LoanPool([$loan]);
+
+        $investorService = new InvestorService($investor1);
+        $investment1 = $investorService->createInvestment(
+            new Money('1000', new Currency('GBP')),
+            DateTime::createFromFormat('d/m/Y', '03/10/2023'),
+            'A',
+            $loan->getId(),
+            $loanPool
+        );
+
+        $this->assertInstanceOf(Investment::class, $investment1);
+
+        $investorService = new InvestorService($investor2);
+
+        $this->expectException(InvalidArgumentException::class);
+        $investorService->createInvestment(
+            new Money('1', new Currency('GBP')),
+            DateTime::createFromFormat('d/m/Y', '04/10/2023'),
+            'A',
+            $loan->getId(),
+            $loanPool
+        );
+    }
+
+    #[Test]
+    public function test_should_not_allow_negative_funds()
+    {
+        // Test
+    }
 }

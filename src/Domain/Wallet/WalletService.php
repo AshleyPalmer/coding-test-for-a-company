@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace LendInvest\CodingTest\Domain\Wallet;
 
-use Exception;
 use Money\Money;
+use InvalidArgumentException;
 use LendInvest\CodingTest\Domain\Wallet\Wallet;
 
 class WalletService
@@ -28,7 +28,7 @@ class WalletService
     public function hasBalanceToInvest(Money $requestedAmount): bool
     {
         if ($requestedAmount->greaterThan($this->wallet->getAmount())) {
-            throw new Exception("Not enough funds to invest", 400);
+            throw new InvalidArgumentException("Not enough funds to invest", 400);
         }
 
         return true;
