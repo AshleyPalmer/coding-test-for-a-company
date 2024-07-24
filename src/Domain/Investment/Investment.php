@@ -9,7 +9,6 @@ class Investment
 {
     protected Loan $loan;
     protected DateTime $startDate;
-    protected int $duration;
 
     public function __construct(Loan $loan, DateTime|null $startDate)
     {
@@ -19,6 +18,7 @@ class Investment
 
     /**
      * Get Loan
+     * 
      * @return Loan
      */
     public function getLoan(): Loan
@@ -28,6 +28,7 @@ class Investment
 
     /**
      * Set Loan
+     * 
      * @param Loan $loan
      * @return Investment
      */
@@ -40,6 +41,7 @@ class Investment
 
     /**
      * Get Investment Start Date
+     * 
      * @return DateTime $startDate
      */
     public function getStartDate(): DateTime
@@ -49,6 +51,7 @@ class Investment
 
     /**
      * Get Investment Start Date
+     * 
      * @param Datetime $startDate
      * @return Investment
      */

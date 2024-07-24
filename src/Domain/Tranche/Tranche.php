@@ -22,6 +22,7 @@ class Tranche
 
     /**
      * Get Tranche Name
+     * 
      * @return string
      */
     public function getName(): string
@@ -31,6 +32,7 @@ class Tranche
 
     /**
      * Set Tranche Name
+     * 
      * @param string $name
      * @return Tranche
      */
@@ -43,6 +45,7 @@ class Tranche
 
     /**
      * Get Tranche Interest Rate
+     * 
      * @return int
      */
     public function getInterestRate(): int
@@ -52,6 +55,7 @@ class Tranche
 
     /**
      * Set Tranche Interest Rate
+     * 
      * @param int $interestRate
      * @return Tranche
      */
@@ -64,6 +68,7 @@ class Tranche
 
     /**
      * Get Available Investment Amount
+     * 
      * @return Money
      */
     public function getAvailableInvestment(): Money
@@ -73,6 +78,7 @@ class Tranche
 
     /**
      * Set Available Investment Amount
+     * 
      * @param Money $amount
      * @return Tranche
      */

@@ -35,8 +35,10 @@ class Loan
     }
 
     /**
-     * @param integer $id
-     * Set ID
+     * Set Loan ID
+     * 
+     * @param int $id
+     * @return Loan
      */
     public function setId(int $id): self
     {
@@ -57,7 +59,9 @@ class Loan
 
     /**
      * Set Loan Start Date
+     * 
      * @param DateTime $startDate
+     * @return Loan
      */
     public function setStartDate(DateTime $startDate): self
     {
@@ -78,7 +82,9 @@ class Loan
 
     /**
      * Set Loan End Date
+     * 
      * @param Datetime $endDate
+     * @return Loan
      */
     public function setEndDate(DateTime $endDate): self
     {
@@ -89,6 +95,7 @@ class Loan
 
     /**
      * Get Loan Tranches
+     * 
      * @return array|Tranche[]|null
      */
     public function getTranches(): ?array
@@ -98,7 +105,9 @@ class Loan
 
     /**
      * Set Loan Tranches
+     * 
      * @param Array|Tranche[]|null $tranches
+     * @return Loan
      */
     public function setTranches($tranches): self
     {

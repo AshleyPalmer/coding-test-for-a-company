@@ -16,6 +16,7 @@ class Wallet
 
     /**
      * Get Wallet Amount
+     * 
      * @return Money
      */
     public function getAmount(): Money
@@ -25,6 +26,7 @@ class Wallet
 
     /**
      * Set Wallet Amount
+     * 
      * @param Money $amount
      * @return Wallet
      */
@@ -37,6 +39,7 @@ class Wallet
 
     /**
      * Returns Wallet Amount as a Money JSON object
+     * 
      * @return array
      */
     public function getAmountJson(): array
