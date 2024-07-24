@@ -41,7 +41,7 @@ class Investment extends Loan
     /**
      * Get Investment Start Date
      * 
-     * @param Datetime $startDate
+     * @param  Datetime $startDate
      * @return Investment
      */
     public function setStartDate(DateTime $startDate): self
@@ -54,7 +54,7 @@ class Investment extends Loan
     /**
      * Set Invested Tranche Name
      * 
-     * @param string $trancheName
+     * @param  string $trancheName
      * @return Investment
      */
     public function setTrancheName(string $trancheName): self
@@ -97,7 +97,7 @@ class Investment extends Loan
     /**
      * Set Invested Amount
      * 
-     * @param Money $amount
+     * @param  Money $amount
      * @return Investment
      */
     public function setInvestedAmount(Money $amount): self

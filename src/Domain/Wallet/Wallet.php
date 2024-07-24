@@ -29,7 +29,7 @@ class Wallet
     /**
      * Set Wallet Amount
      * 
-     * @param Money $amount
+     * @param  Money $amount
      * @return Wallet
      */
     public function setAmount(Money $amount): self

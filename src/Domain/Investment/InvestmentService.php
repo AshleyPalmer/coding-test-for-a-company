@@ -30,22 +30,30 @@ class InvestmentService
      */
     public function getEarnedAmountForPeriod(DateTime $endDate): Money
     {
-        $daysInvested = $this->intervalCalc->getInvestmentPeriodTerm(
-            $this->investment->getStartDate(),
-            $endDate
+        $earnedForPeriod = $this->earningsCalc->getEarnedInterestAmount(
+            $this->investment->getInvestedAmount(),
+            $this->getPeriodInterestRate($endDate)
         );
 
+        return $earnedForPeriod;
+    }
+
+    private function getPeriodInterestRate(DateTime $endDate): int|float
+    {
         $dailyInterestRate = $this->interestCalc->getDailyInterestRate(
             $this->getInvestedTranche()->getInterestRate(),
             $endDate
         );
 
-        $earnedForPeriod = $this->earningsCalc->getEarnedInterestAmount(
-            $this->investment->getInvestedAmount(),
-            $dailyInterestRate
+        $daysInvested = $this->intervalCalc->getInvestmentPeriodTerm(
+            $this->investment->getStartDate(),
+            $endDate
         );
 
-        return $earnedForPeriod;
+        return $this->interestCalc->getInvestedPeriodInterestRate(
+            $dailyInterestRate,
+            $daysInvested
+        );
     }
 
     /**

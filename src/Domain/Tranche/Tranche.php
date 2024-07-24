@@ -31,7 +31,7 @@ class Tranche
     /**
      * Set Tranche Name
      * 
-     * @param string $name
+     * @param  string $name
      * @return Tranche
      */
     public function setName(string $name): self
@@ -54,7 +54,7 @@ class Tranche
     /**
      * Set Tranche Interest Rate
      * 
-     * @param int $interestRate
+     * @param  int $interestRate
      * @return Tranche
      */
     public function setInterestRate(int $interestRate): self
@@ -77,7 +77,7 @@ class Tranche
     /**
      * Set Available Investment Amount
      * 
-     * @param Money $amount
+     * @param  Money $amount
      * @return Tranche
      */
     public function setAvailableInvestment(Money $amount): self

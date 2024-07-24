@@ -11,8 +11,8 @@ class InterestRateCalculator
     /**
      * Calculate the daily interest rate
      * 
-     * @param int|float $interestRate
-     * @param DateTime $inputDate
+     * @param  int|float $interestRate
+     * @param  DateTime  $inputDate
      * @return int|float
      */
     public function getDailyInterestRate(int|float $interestRate, DateTime $inputDate): float|int
@@ -26,8 +26,8 @@ class InterestRateCalculator
     /**
      * Calculate the interest rate for a period of days invested
      * 
-     * @param int|float $dailyInterestRate
-     * @param int $daysInvested
+     * @param  int|float $dailyInterestRate
+     * @param  int       $daysInvested
      * @return int|float
      */
     public function getInvestedPeriodInterestRate(int|float $dailyInterestRate, int $daysInvested)

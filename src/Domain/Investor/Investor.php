@@ -32,7 +32,7 @@ class Investor
     /**
      * Set Investor Name
      * 
-     * @param string $investorName
+     * @param  string $investorName
      * @return Investor
      */
     public function setInvestorName(string $investorName): self
@@ -55,7 +55,7 @@ class Investor
     /**
      * Set Investor's Wallet
      * 
-     * @param Wallet $wallet
+     * @param  Wallet $wallet
      * @return Investor
      */
     public function setWallet(Wallet $wallet): self
@@ -78,7 +78,7 @@ class Investor
     /**
      * Set Investors Investments
      * 
-     * @param Array|Investment[]|null $investments
+     * @param  Array|Investment[]|null $investments
      * @return Investor
      */
     public function setInvestments($investments): self

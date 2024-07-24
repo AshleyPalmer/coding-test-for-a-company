@@ -20,5 +20,11 @@
             "name": "Ashley Palmer",
             "email": "ashley.palmer@eckoh.com"
         }
-    ]
+    ],
+    "scripts": {
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "test": "phpunit",
+        "phpmd-full": "phpmd src text cleancode,codesize,controversial,design,unusedcode"
+    }
 }

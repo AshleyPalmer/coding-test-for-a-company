@@ -12,8 +12,8 @@ class DateIntervalCalculator
     /**
      * Calculate the length of time invested in days
      * 
-     * @param DateTime $startDate
-     * @param DateTime $endDate
+     * @param  DateTime $startDate
+     * @param  DateTime $endDate
      * @return int
      */
     public function getInvestmentPeriodTerm(DateTime $startDate, DateTime $endDate): int

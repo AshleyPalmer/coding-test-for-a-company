@@ -20,9 +20,9 @@ class LoanService
     /**
      * Creates and adds a new Tranche to the Loan
      * 
-     * @param string $name
-     * @param int $interestRate
-     * @param Money $availableInvestment
+     * @param  string $name
+     * @param  int    $interestRate
+     * @param  Money  $availableInvestment
      * @return Loan
      */
     public function createTranche(
