@@ -11,8 +11,9 @@ use LendInvest\CodingTest\Domain\Wallet\Wallet;
 class WalletService
 {
     public function __construct(
-        private Wallet $wallet,
+        protected Wallet $wallet
     ) {
+        $this->wallet = $wallet;
     }
 
     public function deductFromWallet(Money $amount): Wallet
@@ -26,7 +27,7 @@ class WalletService
         }
     }
 
-    private function hasBalanceToInvest(Money $requestedAmount): bool
+    public function hasBalanceToInvest(Money $requestedAmount): bool
     {
         if ($requestedAmount->greaterThan($this->wallet->getAmount())) {
             throw new Exception("Not enough funds to invest", 400);

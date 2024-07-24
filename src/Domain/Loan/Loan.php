@@ -10,16 +10,42 @@ use LendInvest\CodingTest\Domain\Tranche\Tranche;
 
 class Loan
 {
+    protected string $id;
     protected DateTime $startDate;
     protected DateTime $endDate;
     protected ?array $tranches;
 
     public function __construct(
+        string $id,
         DateTime $startDate,
         DateTime $endDate,
     ) {
+        $this->id = $id;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+    }
+
+    /**
+     * Get Loan ID
+     * 
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set Loan ID
+     * 
+     * @param  string $id
+     * @return Loan
+     */
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -92,10 +118,10 @@ class Loan
     /**
      * Set Loan Tranches
      * 
-     * @param  Array|Tranche[]|null $tranches
+     * @param  array|Tranche[]|null $tranches
      * @return Loan
      */
-    public function setTranches($tranches): self
+    public function setTranches(?array $tranches): self
     {
         $this->tranches = $tranches;
 

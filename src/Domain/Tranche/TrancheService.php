@@ -11,7 +11,7 @@ use LendInvest\CodingTest\Domain\Tranche\Tranche;
 class TrancheService
 {
     public function __construct(
-        private Tranche $tranche,
+        private Tranche $tranche
     ) {
     }
 
@@ -26,7 +26,7 @@ class TrancheService
         return $this->tranche;
     }
 
-    private function hasAmountToInvest(Money $requestedAmount): bool
+    public function hasAmountToInvest(Money $requestedAmount): bool
     {
         if ($requestedAmount->greaterThan($this->tranche->getAvailableInvestment())) {
             throw new Exception("Not enough available capacity to invest in this tranche", 400);

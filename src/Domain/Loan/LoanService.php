@@ -13,7 +13,7 @@ use LendInvest\CodingTest\Domain\Tranche\Tranche;
 class LoanService
 {
     public function __construct(
-        private Loan $loan,
+        private Loan $loan
     ) {
     }
 
