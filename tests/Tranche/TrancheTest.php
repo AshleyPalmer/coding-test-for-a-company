@@ -1,13 +1,16 @@
 <?php
 
-use LendInvest\Domain\Tranche;
+declare(strict_types=1);
+
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\Test;
+use LendInvest\CodingTest\Domain\Tranche\Tranche;
 
 class TrancheTest extends TestCase
 {
-    protected Tranche $tranche;
 
-    public function setUp(): void
+    #[Test]
+    public function trancheCanBeCreated(): void
     {
     }
 }

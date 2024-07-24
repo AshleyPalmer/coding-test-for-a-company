@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Test;
-use LendInvest\CodingTest\Domain\Loan\Loan;
+use LendInvest\CodingTest\Domain\Wallet\Wallet;
 
-class LoanTest extends TestCase
+class WalletTest extends TestCase
 {
 
     #[Test]
-    public function loanCanBeCreated(): void
+    public function walletCanBeCreated(): void
     {
     }
 }
