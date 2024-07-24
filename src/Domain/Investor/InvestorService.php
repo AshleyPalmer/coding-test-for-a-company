@@ -4,26 +4,62 @@ declare(strict_types=1);
 
 namespace LendInvest\CodingTest\Domain\Investor;
 
+use DateTime;
+use Throwable;
+use Money\Money;
 use LendInvest\CodingTest\Domain\Investor\Investor;
+use LendInvest\CodingTest\Domain\LoanPool\LoanPool;
 use LendInvest\CodingTest\Domain\Wallet\WalletService;
+use LendInvest\CodingTest\Domain\Investment\Investment;
 use LendInvest\CodingTest\Domain\Tranche\TrancheService;
 
 class InvestorService
 {
     public function __construct(
         private Investor $investor,
-        private WalletService $walletService,
-        private TrancheService $trancheService
     ) {
     }
 
-    public function createInvestment()
-    {
-        /**
-         * TODO: 
-         * 1. Check existing balance in wallet, and requested investment size
-         * 2. Check Loan Tranche has available amount for requested investment size
-         * 3. Create the investment
-         */
+    /**
+     * Create a new Investment object
+     * 
+     * @param Money    $amount
+     * @param Datetime $investDate
+     * @param string   $trancheName
+     * @param string   $loanId
+     * @param LoanPool $loanPool
+     * 
+     * @return Investment
+     */
+    public function createInvestment(
+        Money $amount,
+        DateTime $investDate,
+        string $trancheName,
+        string $loanId,
+        LoanPool $loanPool,
+    ): Investment {
+        $walletService = new WalletService($this->investor->getWallet());
+
+        try {
+            $loan = $loanPool->getLoanById($loanId);
+            $tranche = $loan->getTrancheByName($trancheName);
+            $trancheService = new TrancheService($tranche);
+
+            //Validation check the tranche and wallet 
+            //to make sure both have enough capacity to be invested
+            if (
+                $trancheService->hasAmountToInvest($amount)
+                && $walletService->hasBalanceToInvest($amount)
+            ) {
+                $investment = (new Investment($loan))
+                    ->setStartDate($investDate)
+                    ->setTrancheName($tranche->getName())
+                    ->setInvestedAmount($amount);
+
+                return $investment;
+            }
+        } catch (Throwable $e) {
+            throw $e->getMessage();
+        }
     }
 }
