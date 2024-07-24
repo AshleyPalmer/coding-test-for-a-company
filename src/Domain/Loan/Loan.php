@@ -10,44 +10,16 @@ use LendInvest\Domain\Tranche;
 
 class Loan
 {
-    protected int $id;
     protected DateTime $startDate;
     protected DateTime $endDate;
     protected ?array $tranches;
 
     public function __construct(
-        int $id,
         DateTime $startDate,
         DateTime $endDate,
-        array $tranches = []
     ) {
-        $this->id = $id;
         $this->startDate = $startDate;
         $this->endDate = $endDate;
-        $this->tranches = $tranches;
-    }
-
-    /**
-     * Get Loan ID
-     * 
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set Loan ID
-     * 
-     * @param int $id
-     * @return Loan
-     */
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**

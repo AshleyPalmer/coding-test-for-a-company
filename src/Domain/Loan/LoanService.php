@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace LendInvest\Domain;
 
+use Exception;
 use Money\Money;
 use LendInvest\Domain\Loan;
+use InvalidArgumentException;
 
 class LoanService
 {
@@ -27,6 +29,17 @@ class LoanService
         int $interestRate,
         Money $availableInvestment
     ): Loan {
+        try {
+            if ($this->loan->getTrancheByName($name)) {
+                throw new Exception("Tranche already exists with this name");
+            }
+        } catch (InvalidArgumentException $e) {
+            //No Tranches exist already with this name, carry on
+        } catch (Exception $e) {
+            echo $e->getMessage();
+            exit;
+        }
+
         $loanTranches = $this->loan->getTranches();
         $tranche = new Tranche($name, $interestRate, $availableInvestment);
 
