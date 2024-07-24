@@ -12,7 +12,7 @@ class Investment extends Loan
 {
     protected Loan $loan;
     protected string $trancheName;
-    protected DateTime $startDate;
+    protected DateTime $investmentStartDate;
     protected Money $investedAmount;
 
     public function __construct(Loan $loan)
@@ -25,9 +25,9 @@ class Investment extends Loan
      * 
      * @return DateTime $startDate
      */
-    public function getStartDate(): DateTime
+    public function getInvestmentStartDate(): DateTime
     {
-        return $this->startDate;
+        return $this->investmentStartDate;
     }
 
     /**
@@ -36,7 +36,7 @@ class Investment extends Loan
      * @param  Datetime $startDate
      * @return Investment
      */
-    public function setStartDate(DateTime $startDate): self
+    public function setinvestmentStartDate(DateTime $startDate): self
     {
         $this->startDate = $startDate;
 

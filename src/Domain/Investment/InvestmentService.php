@@ -46,7 +46,7 @@ class InvestmentService
         );
 
         $daysInvested = $this->intervalCalc->getInvestmentPeriodTerm(
-            $this->investment->getStartDate(),
+            $this->investment->getInvestmentStartDate(),
             $endDate
         );
 
