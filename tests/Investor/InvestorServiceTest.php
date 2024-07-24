@@ -22,6 +22,7 @@ class InvestorServiceTest extends TestCase
     public function test_can_create_investment()
     {
         $investor = (new Investor('Investor 1'))->setWallet(new Wallet('1000'));
+        $investor3 = (new Investor('Investor 3'))->setWallet(new Wallet('1000'));
 
         $loan = (new Loan(
             'loan',
@@ -29,10 +30,10 @@ class InvestorServiceTest extends TestCase
             DateTime::createFromFormat('d/m/Y', '15/11/2023')
         ))->setTranches(
             [
-                (new Tranche('A'))
+                (new Tranche(Tranche::TRANCHE_A))
                     ->setInterestRate(3)
                     ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
-                (new Tranche('B'))
+                (new Tranche(Tranche::TRANCHE_B))
                     ->setInterestRate(6)
                     ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
             ]
@@ -44,12 +45,25 @@ class InvestorServiceTest extends TestCase
         $investment = $investorService->createInvestment(
             new Money('1000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
-            'A',
+            Tranche::TRANCHE_A,
             $loan->getId(),
             $loanPool
         );
 
         $this->assertInstanceOf(Investment::class, $investment);
+
+        $investorService = new InvestorService($investor3);
+        $investment = $investorService->createInvestment(
+            new Money('500', new Currency('GBP')),
+            DateTime::createFromFormat('d/m/Y', '10/10/2023'),
+            Tranche::TRANCHE_B,
+            $loan->getId(),
+            $loanPool
+        );
+
+        $this->assertInstanceOf(Investment::class, $investment);
+        //TODO: Assert investor 1 has no money, and tranche A has no money
+        //TODO: Assert investor 2 has 500, and tranche B has 500
     }
 
     #[Test]
@@ -64,10 +78,10 @@ class InvestorServiceTest extends TestCase
             DateTime::createFromFormat('d/m/Y', '15/11/2023')
         ))->setTranches(
             [
-                (new Tranche('A'))
+                (new Tranche(Tranche::TRANCHE_A))
                     ->setInterestRate(3)
                     ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
-                (new Tranche('B'))
+                (new Tranche(Tranche::TRANCHE_B))
                     ->setInterestRate(6)
                     ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
             ]
@@ -79,7 +93,7 @@ class InvestorServiceTest extends TestCase
         $investment1 = $investorService->createInvestment(
             new Money('1000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
-            'A',
+            Tranche::TRANCHE_A,
             $loan->getId(),
             $loanPool
         );
@@ -92,7 +106,7 @@ class InvestorServiceTest extends TestCase
         $investorService->createInvestment(
             new Money('1', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '04/10/2023'),
-            'A',
+            Tranche::TRANCHE_A,
             $loan->getId(),
             $loanPool
         );

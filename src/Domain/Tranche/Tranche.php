@@ -8,6 +8,9 @@ use Money\Money;
 
 class Tranche
 {
+    public const TRANCHE_A = 'A';
+    public const TRANCHE_B = 'B';
+
     protected string $name;
     protected int $interestRate;
     protected Money $availableInvestment;
