@@ -17,11 +17,9 @@ class TrancheService
 
     public function deductFromTranche(Money $amount): Tranche
     {
-        if ($this->hasAmountToInvest($amount)) {
-            $this->tranche->setAvailableInvestment(
-                $this->tranche->getAvailableInvestment()->subtract($amount)
-            );
-        }
+        $this->tranche->setAvailableInvestment(
+            $this->tranche->getAvailableInvestment()->subtract($amount)
+        );
 
         return $this->tranche;
     }

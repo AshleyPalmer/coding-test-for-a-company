@@ -18,13 +18,11 @@ class WalletService
 
     public function deductFromWallet(Money $amount): Wallet
     {
-        if ($this->hasBalanceToInvest($amount)) {
-            $this->wallet->setAmount(
-                $this->wallet->getAmount()->subtract($amount)
-            );
+        $this->wallet->setAmount(
+            $this->wallet->getAmount()->subtract($amount)
+        );
 
-            return $this->wallet;
-        }
+        return $this->wallet;
     }
 
     public function hasBalanceToInvest(Money $requestedAmount): bool
