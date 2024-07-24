@@ -14,12 +14,8 @@ class Tranche
 
     public function __construct(
         string $name,
-        int $interestRate,
-        Money $availableInvestment
     ) {
         $this->name = $name;
-        $this->interestRate = $interestRate;
-        $this->availableInvestment = $availableInvestment;
     }
 
     /**

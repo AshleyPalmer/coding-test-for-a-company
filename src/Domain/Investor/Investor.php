@@ -9,42 +9,14 @@ use LendInvest\Domain\Investment;
 
 class Investor
 {
-    protected int $id;
     protected string $investorName;
     protected Wallet $wallet;
     protected ?array $investments;
 
     public function __construct(
-        int $id,
         string $investorName,
-        Wallet $wallet
     ) {
-        $this->id = $id;
         $this->investorName = $investorName;
-        $this->wallet = $wallet;
-    }
-
-    /**
-     * Get Investor ID
-     * 
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set Investor ID
-     * 
-     * @param int $id
-     * @return Investor
-     */
-    public function setId(int $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**
