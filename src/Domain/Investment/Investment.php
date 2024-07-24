@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LendInvest\Domain;
 
 use DateTime;
+use Money\Money;
 use LendInvest\Domain\Loan;
 
 class Investment extends Loan
@@ -12,8 +13,9 @@ class Investment extends Loan
     protected Loan $loan;
     protected string $trancheName;
     protected DateTime $startDate;
+    protected Money $investedAmount;
 
-    public function __construct(Loan $loan, string $trancheName, DateTime|null $startDate)
+    public function __construct(Loan $loan, string $trancheName, DateTime|null $startDate, Money $investedAmount)
     {
         parent::__construct(
             $loan->id,
@@ -24,6 +26,7 @@ class Investment extends Loan
 
         $this->startDate = $startDate ?: new DateTime('now');
         $this->trancheName = $trancheName;
+        $this->investedAmount = $investedAmount;
     }
 
     /**
@@ -70,5 +73,38 @@ class Investment extends Loan
     public function getTrancheName(): string
     {
         return $this->trancheName;
+    }
+
+    /**
+     * Get Investment Loan
+     * 
+     * @return Loan
+     */
+    public function getLoan(): Loan
+    {
+        return $this->loan;
+    }
+
+    /**
+     * Get Invested Amount
+     * 
+     * @return Money
+     */
+    public function getInvestedAmount(): Money
+    {
+        return $this->investedAmount;
+    }
+
+    /**
+     * Set Invested Amount
+     * 
+     * @param Money $amount
+     * @return Investment
+     */
+    public function setInvestedAmount(Money $amount): self
+    {
+        $this->investedAmount = $amount;
+
+        return $this;
     }
 }
