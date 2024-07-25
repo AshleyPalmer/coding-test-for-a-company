@@ -8,15 +8,22 @@ use DateTime;
 use Money\Money;
 use LendInvest\CodingTest\Domain\Tranche\Tranche;
 use LendInvest\CodingTest\Domain\Investment\Investment;
-use LendInvest\CodingTest\Domain\Calculator\DateIntervalCalculator as IntervalCalc;
-use LendInvest\CodingTest\Domain\Calculator\InterestRateCalculator as InterestCalc;
-use LendInvest\CodingTest\Domain\Calculator\EarnedInterestCalculator as EarningsCalc;
+use LendInvest\CodingTest\Domain\Calculator\DateIntervalCalculator;
+use LendInvest\CodingTest\Domain\Calculator\InterestRateCalculator;
+use LendInvest\CodingTest\Domain\Calculator\EarnedInterestCalculator;
 
 class InvestmentService
 {
+    protected DateIntervalCalculator $dateIntervalCalculator;
+    protected InterestRateCalculator $interestRateCalculator;
+    protected EarnedInterestCalculator $earnedInterestCalculator;
+
     public function __construct(
         private Investment $investment,
     ) {
+        $this->dateIntervalCalculator = new DateIntervalCalculator();
+        $this->interestRateCalculator = new InterestRateCalculator();
+        $this->earnedInterestCalculator = new EarnedInterestCalculator();
     }
 
     /**
@@ -27,7 +34,7 @@ class InvestmentService
      */
     public function getEarnedAmountForPeriod(DateTime $endDate): Money
     {
-        $earnedForPeriod = EarningsCalc::getEarnedInterestAmount(
+        $earnedForPeriod = $this->earnedInterestCalculator->getEarnedInterestAmount(
             $this->investment->getInvestedAmount(),
             $this->getPeriodInterestRate($endDate)
         );
@@ -37,17 +44,17 @@ class InvestmentService
 
     private function getPeriodInterestRate(DateTime $endDate): int|float
     {
-        $dailyInterestRate = InterestCalc::getDailyInterestRate(
+        $dailyInterestRate = $this->interestRateCalculator->getDailyInterestRate(
             $this->getInvestedTranche()->getInterestRate(),
             $endDate
         );
 
-        $daysInvested = IntervalCalc::getInvestmentPeriodTerm(
+        $daysInvested = $this->dateIntervalCalculator->getInvestmentPeriodTerm(
             $this->investment->getInvestmentStartDate(),
             $endDate
         );
 
-        return InterestCalc::getInvestedPeriodInterestRate(
+        return $this->interestRateCalculator->getInvestedPeriodInterestRate(
             $dailyInterestRate,
             $daysInvested
         );

@@ -41,8 +41,7 @@ class LoanService
         } catch (InvalidArgumentException $e) {
             //No Tranches exist already with this name, carry on
         } catch (Exception $e) {
-            echo $e->getMessage();
-            exit;
+            throw new InvalidArgumentException($e->getMessage());
         }
 
         $loanTranches = $this->loan->getTranches();
