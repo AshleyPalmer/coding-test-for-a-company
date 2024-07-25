@@ -13,7 +13,7 @@ class Loan
     protected string $id;
     protected DateTime $startDate;
     protected DateTime $endDate;
-    protected ?array $tranches;
+    protected ?array $tranches = [];
 
     public function __construct(
         string $id,

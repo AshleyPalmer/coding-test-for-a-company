@@ -7,6 +7,10 @@ namespace LendInvest\CodingTest\Domain\LoanPool;
 use InvalidArgumentException;
 use LendInvest\CodingTest\Domain\Loan\Loan;
 
+/**
+ * The purpose of this class is to sort of
+ * act as a database table for the loans
+ */
 class LoanPool
 {
     protected ?array $loans;

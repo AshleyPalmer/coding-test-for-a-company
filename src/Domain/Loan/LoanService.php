@@ -20,6 +20,10 @@ class LoanService
     /**
      * Creates and adds a new Tranche to the Loan
      * 
+     * Note: this isn't used in the unit tests, because the loans 
+     * and tranches are mocked rather than built through the service functions..
+     * But it is used in the bin/Tests.php functions
+     * 
      * @param  string $name
      * @param  int    $interestRate
      * @param  Money  $availableInvestment
@@ -42,14 +46,12 @@ class LoanService
         }
 
         $loanTranches = $this->loan->getTranches();
-        $tranche = new Tranche($name, $interestRate, $availableInvestment);
+        $tranche = (new Tranche($name))
+            ->setInterestRate($interestRate)
+            ->setAvailableInvestment($availableInvestment);
 
-        $combinedTranches = array_combine(
-            array_map(fn (Tranche $tranche) => $tranche->getName(), $loanTranches),
-            $loanTranches
-        );
-
-        $this->loan->setTranches($combinedTranches);
+        array_push($loanTranches, $tranche);
+        $this->loan->setTranches($loanTranches);
 
         return $this->loan;
     }
