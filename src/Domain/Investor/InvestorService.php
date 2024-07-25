@@ -29,7 +29,7 @@ class InvestorService
      * @param string   $loanId
      * @param LoanPool $loanPool
      * 
-     * @return Investment
+     * @return Investor
      */
     public function createInvestment(
         Money $amount,
@@ -37,7 +37,7 @@ class InvestorService
         string $trancheName,
         string $loanId,
         LoanPool $loanPool,
-    ): Investment {
+    ): Investor {
         $walletService = new WalletService($this->investor->getWallet());
 
         try {
@@ -59,10 +59,29 @@ class InvestorService
                     ->setTrancheName($tranche->getName())
                     ->setInvestedAmount($amount);
 
-                return $investment;
+                $this->investor->setInvestments(
+                    $this->updateInvestments($investment)
+                );
+
+                return $this->investor;
             }
         } catch (InvalidArgumentException $e) {
             throw $e;
         }
+    }
+
+    /**
+     * Appends a new investment to the Investors existing investments
+     * 
+     * @param Investment $newInvestment
+     * @return array|Investment[]
+     */
+    private function updateInvestments(
+        Investment $newInvestment
+    ): array {
+        $existingInvestments = $this->investor->getInvestments();
+        array_push($existingInvestments, $newInvestment);
+
+        return $existingInvestments;
     }
 }

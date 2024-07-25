@@ -10,13 +10,14 @@ use LendInvest\CodingTest\Domain\Investment\Investment;
 class Investor
 {
     protected string $investorName;
-    protected Wallet $wallet;
+    protected ?Wallet $wallet;
     protected ?array $investments;
 
     public function __construct(
         string $investorName,
     ) {
         $this->investorName = $investorName;
+        $this->investments = [];
     }
 
     /**
@@ -45,9 +46,9 @@ class Investor
     /**
      * Get Investor's Wallet
      * 
-     * @return Wallet
+     * @return Wallet|null
      */
-    public function getWallet(): Wallet
+    public function getWallet(): ?Wallet
     {
         return $this->wallet;
     }
@@ -81,7 +82,7 @@ class Investor
      * @param  Array|Investment[]|null $investments
      * @return Investor
      */
-    public function setInvestments($investments): self
+    public function setInvestments(?array $investments): self
     {
         $this->investments = $investments;
 

@@ -25,10 +25,10 @@ class InvestorServiceTest extends TestCase
 
     public function setUp(): void
     {
-        $this->investor1 = (new Investor('Investor 1'))->setWallet(new Wallet('1000'));
-        $this->investor2 = (new Investor('Investor 2'))->setWallet(new Wallet('1000'));
-        $this->investor3 = (new Investor('Investor 3'))->setWallet(new Wallet('1000'));
-        $this->investor4 = (new Investor('Investor 4'))->setWallet(new Wallet('1000'));
+        $this->investor1 = (new Investor('Investor 1'))->setWallet(new Wallet('100000'));
+        $this->investor2 = (new Investor('Investor 2'))->setWallet(new Wallet('100000'));
+        $this->investor3 = (new Investor('Investor 3'))->setWallet(new Wallet('100000'));
+        $this->investor4 = (new Investor('Investor 4'))->setWallet(new Wallet('100000'));
 
         $this->loan = (new Loan(
             'loan',
@@ -38,10 +38,10 @@ class InvestorServiceTest extends TestCase
             [
                 (new Tranche(Tranche::TRANCHE_A))
                     ->setInterestRate(3)
-                    ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
+                    ->setAvailableInvestment(new Money('100000', new Currency('GBP'))),
                 (new Tranche(Tranche::TRANCHE_B))
                     ->setInterestRate(6)
-                    ->setAvailableInvestment(new Money('1000', new Currency('GBP'))),
+                    ->setAvailableInvestment(new Money('100000', new Currency('GBP'))),
             ]
         );
 
@@ -53,19 +53,19 @@ class InvestorServiceTest extends TestCase
     public function test_can_create_investments()
     {
         $investorService = new InvestorService($this->investor1);
-        $investment = $investorService->createInvestment(
-            new Money('1000', new Currency('GBP')),
+        $this->investor1 = $investorService->createInvestment(
+            new Money('100000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
             Tranche::TRANCHE_A,
             $this->loan->getId(),
             $this->loanPool
         );
 
-        $this->assertInstanceOf(Investment::class, $investment);
+        $this->assertInstanceOf(Investor::class, $this->investor1);
 
         $investorService = new InvestorService($this->investor3);
-        $investment = $investorService->createInvestment(
-            new Money('500', new Currency('GBP')),
+        $this->investor3 = $investorService->createInvestment(
+            new Money('50000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '10/10/2023'),
             Tranche::TRANCHE_B,
             $this->loan->getId(),
@@ -73,9 +73,9 @@ class InvestorServiceTest extends TestCase
         );
 
         $mockZeroMoney = new Money('0', new Currency('GBP'));
-        $mockHalfMoney = new Money('500', new Currency('GBP'));
+        $mockHalfMoney = new Money('50000', new Currency('GBP'));
 
-        $this->assertInstanceOf(Investment::class, $investment);
+        $this->assertInstanceOf(Investor::class, $this->investor3);
         $this->assertEquals($mockZeroMoney, $this->investor1->getWallet()->getAmount());
         $this->assertEquals(
             $mockZeroMoney,
@@ -93,21 +93,21 @@ class InvestorServiceTest extends TestCase
     public function test_should_not_allow_excessive_investment()
     {
         $investorService = new InvestorService($this->investor1);
-        $investment = $investorService->createInvestment(
-            new Money('1000', new Currency('GBP')),
+        $this->investor1 = $investorService->createInvestment(
+            new Money('100000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
             Tranche::TRANCHE_A,
             $this->loan->getId(),
             $this->loanPool
         );
 
-        $this->assertInstanceOf(Investment::class, $investment);
+        $this->assertInstanceOf(Investor::class, $this->investor1);
 
         $investorService = new InvestorService($this->investor2);
 
         try {
-            $investmentAttempt = $investorService->createInvestment(
-                new Money('1', new Currency('GBP')),
+            $this->investor2 = $investorService->createInvestment(
+                new Money('100', new Currency('GBP')),
                 DateTime::createFromFormat('d/m/Y', '04/10/2023'),
                 Tranche::TRANCHE_A,
                 $this->loan->getId(),
@@ -116,9 +116,9 @@ class InvestorServiceTest extends TestCase
         } catch (InvalidArgumentException $e) {
             $this->assertInstanceOf(InvalidArgumentException::class, $e);
         } finally {
-            $this->assertNotInstanceOf(Investment::class, $investmentAttempt);
+            $this->assertInstanceOf(Investor::class, $this->investor2);
             $this->assertEquals(
-                new Money('1000', new Currency('GBP')),
+                new Money('100000', new Currency('GBP')),
                 $this->investor2->getWallet()->getAmount()
             );
             $this->assertEquals(
@@ -134,8 +134,8 @@ class InvestorServiceTest extends TestCase
         $investorService = new InvestorService($this->investor4);
 
         try {
-            $investment = $investorService->createInvestment(
-                new Money('1100', new Currency('GBP')),
+            $this->investor4 = $investorService->createInvestment(
+                new Money('110000', new Currency('GBP')),
                 DateTime::createFromFormat('d/m/Y', '25/10/2023'),
                 Tranche::TRANCHE_B,
                 $this->loan->getId(),
@@ -144,13 +144,13 @@ class InvestorServiceTest extends TestCase
         } catch (InvalidArgumentException $e) {
             $this->assertInstanceOf(InvalidArgumentException::class, $e);
         } finally {
-            $this->assertNotInstanceOf(Investment::class, $investment);
+            $this->assertInstanceOf(Investor::class, $this->investor4);
             $this->assertEquals(
-                new Money('1000', new Currency('GBP')),
+                new Money('100000', new Currency('GBP')),
                 $this->investor4->getWallet()->getAmount()
             );
             $this->assertEquals(
-                new Money('1000', new Currency('GBP')),
+                new Money('100000', new Currency('GBP')),
                 $this->loan->getTrancheByName(Tranche::TRANCHE_B)->getAvailableInvestment()
             );
         }
