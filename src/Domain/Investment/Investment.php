@@ -8,24 +8,24 @@ use DateTime;
 use Money\Money;
 use LendInvest\CodingTest\Domain\Loan\Loan;
 
-class Investment extends Loan
+class Investment
 {
     protected Loan $loan;
-    protected string $trancheName;
-    protected DateTime $investmentStartDate;
-    protected Money $investedAmount;
+    protected ?string $trancheName;
+    protected ?DateTime $investmentStartDate;
+    protected ?Money $investedAmount;
 
     public function __construct(Loan $loan)
     {
-        parent::__construct($loan->id, $loan->startDate, $loan->endDate);
+        $this->loan = $loan;
     }
 
     /**
      * Get Investment Start Date
      * 
-     * @return DateTime $startDate
+     * @return DateTime|null $startDate
      */
-    public function getInvestmentStartDate(): DateTime
+    public function getInvestmentStartDate(): ?DateTime
     {
         return $this->investmentStartDate;
     }
@@ -38,7 +38,7 @@ class Investment extends Loan
      */
     public function setinvestmentStartDate(DateTime $startDate): self
     {
-        $this->startDate = $startDate;
+        $this->investmentStartDate = $startDate;
 
         return $this;
     }
@@ -59,9 +59,9 @@ class Investment extends Loan
     /**
      * Get Invested Tranche Name
      * 
-     * @return string
+     * @return string|null
      */
-    public function getTrancheName(): string
+    public function getTrancheName(): ?string
     {
         return $this->trancheName;
     }
@@ -92,9 +92,9 @@ class Investment extends Loan
     /**
      * Get Invested Amount
      * 
-     * @return Money
+     * @return Money|null
      */
-    public function getInvestedAmount(): Money
+    public function getInvestedAmount(): ?Money
     {
         return $this->investedAmount;
     }
