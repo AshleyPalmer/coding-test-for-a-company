@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\LendInvest\CodingTest\Domain\Investment;
+
 use DateTime;
 use Money\Money;
 use Money\Currency;

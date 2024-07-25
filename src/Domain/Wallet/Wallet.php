@@ -38,14 +38,4 @@ class Wallet
 
         return $this;
     }
-
-    /**
-     * Returns Wallet Amount as a Money JSON object
-     *
-     * @return array
-     */
-    public function getAmountJson(): array
-    {
-        return $this->amount->jsonSerialize();
-    }
 }

@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
+namespace Tests\LendInvest\CodingTest\Domain\Investment;
+
+use DateTime;
 use Money\Money;
 use Money\Currency;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use LendInvest\CodingTest\Domain\Loan\Loan;
@@ -55,7 +59,7 @@ class InvestmentServiceTest extends TestCase
     }
 
     #[Test]
-    public function test_can_calculate_earned_amount_for_period()
+    public function test_can_calculate_earned_amount_for_period(): void
     {
         $investmentService = new InvestmentService($this->mockInvestment1);
         $result = $investmentService->getEarnedAmountForPeriod(DateTime::createFromFormat('d/m/Y', '31/10/2023'));
@@ -71,7 +75,7 @@ class InvestmentServiceTest extends TestCase
     }
 
     #[Test]
-    public function test_should_throw_exception_for_bad_tranche()
+    public function test_should_throw_exception_for_bad_tranche(): void
     {
         $mockInvestment = (new Investment('mock', $this->loan))
             ->setinvestmentStartDate(

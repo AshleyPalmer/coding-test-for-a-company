@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+namespace Tests\LendInvest\CodingTest\Domain\Investor;
+
+use DateTime;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\Attributes\Depends;
@@ -26,7 +29,7 @@ class InvestorTest extends TestCase
         $investor = new Investor($this->investorName);
 
         $this->assertInstanceOf(Investor::class, $investor);
-        $this->assertSame($this->investorName, $investor->getInvestorName());
+        $this->assertEquals($this->investorName, $investor->getInvestorName());
 
         return $investor;
     }
@@ -41,7 +44,7 @@ class InvestorTest extends TestCase
     }
 
     #[Depends('test_investor_can_be_created')]
-    public function test_can_change_investor_name(Investor $investor)
+    public function test_can_change_investor_name(Investor $investor): void
     {
         $this->assertEquals($this->investorName, $investor->getInvestorName());
         $investor->setInvestorName('New Investor');
@@ -49,7 +52,7 @@ class InvestorTest extends TestCase
     }
 
     #[Depends('test_investor_can_be_created')]
-    public function test_can_add_new_investment(Investor $investor)
+    public function test_can_add_new_investment(Investor $investor): void
     {
         $investor->setInvestments(
             [

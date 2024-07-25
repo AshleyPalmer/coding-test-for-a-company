@@ -2,8 +2,12 @@
 
 declare(strict_types=1);
 
+namespace Tests\LendInvest\CodingTest\Domain\Investor;
+
+use DateTime;
 use Money\Money;
 use Money\Currency;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Test;
 use LendInvest\CodingTest\Domain\Loan\Loan;
@@ -11,7 +15,6 @@ use LendInvest\CodingTest\Domain\Wallet\Wallet;
 use LendInvest\CodingTest\Domain\Tranche\Tranche;
 use LendInvest\CodingTest\Domain\Investor\Investor;
 use LendInvest\CodingTest\Domain\LoanPool\LoanPool;
-use LendInvest\CodingTest\Domain\Investment\Investment;
 use LendInvest\CodingTest\Domain\Investor\InvestorService;
 
 class InvestorServiceTest extends TestCase
@@ -50,10 +53,11 @@ class InvestorServiceTest extends TestCase
 
 
     #[Test]
-    public function test_can_create_investments()
+    public function test_can_create_investments(): void
     {
         $investorService = new InvestorService($this->investor1);
         $this->investor1 = $investorService->createInvestment(
+            'Mock Investment',
             new Money('100000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
             Tranche::TRANCHE_A,
@@ -65,6 +69,7 @@ class InvestorServiceTest extends TestCase
 
         $investorService = new InvestorService($this->investor3);
         $this->investor3 = $investorService->createInvestment(
+            'Mock Investment',
             new Money('50000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '10/10/2023'),
             Tranche::TRANCHE_B,
@@ -90,10 +95,11 @@ class InvestorServiceTest extends TestCase
     }
 
     #[Test]
-    public function test_should_not_allow_excessive_investment()
+    public function test_should_not_allow_excessive_investment(): void
     {
         $investorService = new InvestorService($this->investor1);
         $this->investor1 = $investorService->createInvestment(
+            'Mock Investment',
             new Money('100000', new Currency('GBP')),
             DateTime::createFromFormat('d/m/Y', '03/10/2023'),
             Tranche::TRANCHE_A,
@@ -107,6 +113,7 @@ class InvestorServiceTest extends TestCase
 
         try {
             $this->investor2 = $investorService->createInvestment(
+                'Mock Investment',
                 new Money('100', new Currency('GBP')),
                 DateTime::createFromFormat('d/m/Y', '04/10/2023'),
                 Tranche::TRANCHE_A,
@@ -129,12 +136,13 @@ class InvestorServiceTest extends TestCase
     }
 
     #[Test]
-    public function test_should_not_allow_negative_funds()
+    public function test_should_not_allow_negative_funds(): void
     {
         $investorService = new InvestorService($this->investor4);
 
         try {
             $this->investor4 = $investorService->createInvestment(
+                'Mock Investment',
                 new Money('110000', new Currency('GBP')),
                 DateTime::createFromFormat('d/m/Y', '25/10/2023'),
                 Tranche::TRANCHE_B,
