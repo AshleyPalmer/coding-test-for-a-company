@@ -23,7 +23,7 @@ class Investor
 
     /**
      * Get Investor Name
-     * 
+     *
      * @return string
      */
     public function getInvestorName(): string
@@ -33,7 +33,7 @@ class Investor
 
     /**
      * Set Investor Name
-     * 
+     *
      * @param  string $investorName
      * @return Investor
      */
@@ -46,7 +46,7 @@ class Investor
 
     /**
      * Get Investor's Wallet
-     * 
+     *
      * @return Wallet|null
      */
     public function getWallet(): ?Wallet
@@ -56,7 +56,7 @@ class Investor
 
     /**
      * Set Investor's Wallet
-     * 
+     *
      * @param  Wallet $wallet
      * @return Investor
      */
@@ -69,7 +69,7 @@ class Investor
 
     /**
      * Get Investor Investments
-     * 
+     *
      * @return array|Investment[]|null
      */
     public function getInvestments(): ?array
@@ -79,7 +79,7 @@ class Investor
 
     /**
      * Get Investment By ID
-     * 
+     *
      * @param string $id
      * @return Investment
      */
@@ -97,7 +97,7 @@ class Investor
 
     /**
      * Set Investors Investments
-     * 
+     *
      * @param  Array|Investment[]|null $investments
      * @return Investor
      */

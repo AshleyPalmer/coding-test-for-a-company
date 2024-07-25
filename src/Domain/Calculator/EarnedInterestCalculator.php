@@ -10,9 +10,9 @@ use Money\Currency;
 class EarnedInterestCalculator
 {
     /**
-     * Calculates the amount earned from investment, 
+     * Calculates the amount earned from investment,
      * and investment period interest rate
-     * 
+     *
      * @param  Money     $investment
      * @param  int|float $interestRate
      * @return Money

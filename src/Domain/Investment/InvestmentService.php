@@ -29,7 +29,7 @@ class InvestmentService
     /**
      * Uses calculators and Investment object to retrieve the total earned amount
      * for a given period, from the investment start date
-     * 
+     *
      * @param Datetime $endDate
      */
     public function getEarnedAmountForPeriod(DateTime $endDate): Money
@@ -62,7 +62,7 @@ class InvestmentService
 
     /**
      * Gets Invested Tranche
-     * 
+     *
      * @return Tranche
      */
     private function getInvestedTranche(): Tranche

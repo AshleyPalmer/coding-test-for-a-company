@@ -27,7 +27,7 @@ class Loan
 
     /**
      * Get Loan ID
-     * 
+     *
      * @return string
      */
     public function getId(): string
@@ -37,7 +37,7 @@ class Loan
 
     /**
      * Set Loan ID
-     * 
+     *
      * @param  string $id
      * @return Loan
      */
@@ -50,7 +50,7 @@ class Loan
 
     /**
      * Get Start Date
-     * 
+     *
      * @return DateTime
      */
     public function getStartDate(): DateTime
@@ -60,7 +60,7 @@ class Loan
 
     /**
      * Set Loan Start Date
-     * 
+     *
      * @param  DateTime $startDate
      * @return Loan
      */
@@ -73,7 +73,7 @@ class Loan
 
     /**
      * Get Loan End Date
-     * 
+     *
      * @return Datetime
      */
     public function getEndDate(): DateTime
@@ -83,7 +83,7 @@ class Loan
 
     /**
      * Set Loan End Date
-     * 
+     *
      * @param  Datetime $endDate
      * @return Loan
      */
@@ -96,7 +96,7 @@ class Loan
 
     /**
      * Get Loan Tranches
-     * 
+     *
      * @return array|Tranche[]|null
      */
     public function getTranches(): ?array
@@ -118,7 +118,7 @@ class Loan
 
     /**
      * Set Loan Tranches
-     * 
+     *
      * @param  array|Tranche[]|null $tranches
      * @return Loan
      */

@@ -35,7 +35,7 @@ class LoanPool
     }
 
     /**
-     * 
+     *
      */
     public function getLoans(): ?array
     {

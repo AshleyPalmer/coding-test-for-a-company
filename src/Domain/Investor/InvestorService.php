@@ -22,14 +22,14 @@ class InvestorService
 
     /**
      * Create a new Investment object
-     * 
+     *
      * @param string $id
      * @param Money    $amount
      * @param Datetime $investDate
      * @param string   $trancheName
      * @param string   $loanId
      * @param LoanPool $loanPool
-     * 
+     *
      * @return Investor
      */
     public function createInvestment(
@@ -48,7 +48,7 @@ class InvestorService
             $tranche = $loan->getTrancheByName($trancheName);
             $trancheService = new TrancheService($tranche);
 
-            //Validation check the tranche and wallet 
+            //Validation check the tranche and wallet
             //to make sure both have enough capacity to be invested
             if (
                 $trancheService->hasAmountToInvest($amount)
@@ -75,7 +75,7 @@ class InvestorService
 
     /**
      * Appends a new investment to the Investors existing investments
-     * 
+     *
      * @param Investment $newInvestment
      * @return array|Investment[]
      */

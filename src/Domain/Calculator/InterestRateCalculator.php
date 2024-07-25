@@ -10,7 +10,7 @@ class InterestRateCalculator
 {
     /**
      * Calculate the daily interest rate
-     * 
+     *
      * @param  int|float $interestRate
      * @param  DateTime  $inputDate
      * @return int|float
@@ -25,7 +25,7 @@ class InterestRateCalculator
 
     /**
      * Calculate the interest rate for a period of days invested
-     * 
+     *
      * @param  int|float $dailyInterestRate
      * @param  int       $daysInvested
      * @return int|float

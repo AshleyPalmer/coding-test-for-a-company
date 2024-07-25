@@ -36,7 +36,7 @@ class Investment
 
     /**
      * Get Investment Start Date
-     * 
+     *
      * @return DateTime|null $startDate
      */
     public function getInvestmentStartDate(): ?DateTime
@@ -46,7 +46,7 @@ class Investment
 
     /**
      * Get Investment Start Date
-     * 
+     *
      * @param  Datetime $startDate
      * @return Investment
      */
@@ -59,7 +59,7 @@ class Investment
 
     /**
      * Set Invested Tranche Name
-     * 
+     *
      * @param  string $trancheName
      * @return Investment
      */
@@ -72,7 +72,7 @@ class Investment
 
     /**
      * Get Invested Tranche Name
-     * 
+     *
      * @return string|null
      */
     public function getTrancheName(): ?string
@@ -82,7 +82,7 @@ class Investment
 
     /**
      * Get Investment Loan
-     * 
+     *
      * @return Loan
      */
     public function getLoan(): Loan
@@ -92,7 +92,7 @@ class Investment
 
     /**
      * Set Investment Loan
-     * 
+     *
      * @param  Loan $loan
      * @return Investment
      */
@@ -105,7 +105,7 @@ class Investment
 
     /**
      * Get Invested Amount
-     * 
+     *
      * @return Money|null
      */
     public function getInvestedAmount(): ?Money
@@ -115,7 +115,7 @@ class Investment
 
     /**
      * Set Invested Amount
-     * 
+     *
      * @param  Money $amount
      * @return Investment
      */
