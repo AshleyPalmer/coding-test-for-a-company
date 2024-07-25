@@ -16,7 +16,7 @@ class DateIntervalCalculator
      * @param  DateTime $endDate
      * @return int
      */
-    public function getInvestmentPeriodTerm(DateTime $startDate, DateTime $endDate): int
+    public static function getInvestmentPeriodTerm(DateTime $startDate, DateTime $endDate): int
     {
         /**
          * diff sum includes the start date but not the end date,

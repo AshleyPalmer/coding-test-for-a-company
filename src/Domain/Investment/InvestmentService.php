@@ -8,17 +8,14 @@ use DateTime;
 use Money\Money;
 use LendInvest\CodingTest\Domain\Tranche\Tranche;
 use LendInvest\CodingTest\Domain\Investment\Investment;
-use LendInvest\CodingTest\Domain\Calculator\DateIntervalCalculator;
-use LendInvest\CodingTest\Domain\Calculator\InterestRateCalculator;
-use LendInvest\CodingTest\Domain\Calculator\EarnedInterestCalculator;
+use LendInvest\CodingTest\Domain\Calculator\DateIntervalCalculator as IntervalCalc;
+use LendInvest\CodingTest\Domain\Calculator\InterestRateCalculator as InterestCalc;
+use LendInvest\CodingTest\Domain\Calculator\EarnedInterestCalculator as EarningsCalc;
 
 class InvestmentService
 {
     public function __construct(
         private Investment $investment,
-        private DateIntervalCalculator $intervalCalc,
-        private InterestRateCalculator $interestCalc,
-        private EarnedInterestCalculator $earningsCalc
     ) {
     }
 
@@ -30,7 +27,7 @@ class InvestmentService
      */
     public function getEarnedAmountForPeriod(DateTime $endDate): Money
     {
-        $earnedForPeriod = $this->earningsCalc->getEarnedInterestAmount(
+        $earnedForPeriod = EarningsCalc::getEarnedInterestAmount(
             $this->investment->getInvestedAmount(),
             $this->getPeriodInterestRate($endDate)
         );
@@ -40,17 +37,17 @@ class InvestmentService
 
     private function getPeriodInterestRate(DateTime $endDate): int|float
     {
-        $dailyInterestRate = $this->interestCalc->getDailyInterestRate(
+        $dailyInterestRate = InterestCalc::getDailyInterestRate(
             $this->getInvestedTranche()->getInterestRate(),
             $endDate
         );
 
-        $daysInvested = $this->intervalCalc->getInvestmentPeriodTerm(
+        $daysInvested = IntervalCalc::getInvestmentPeriodTerm(
             $this->investment->getInvestmentStartDate(),
             $endDate
         );
 
-        return $this->interestCalc->getInvestedPeriodInterestRate(
+        return InterestCalc::getInvestedPeriodInterestRate(
             $dailyInterestRate,
             $daysInvested
         );

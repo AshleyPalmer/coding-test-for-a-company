@@ -15,7 +15,7 @@ class InterestRateCalculator
      * @param  DateTime  $inputDate
      * @return int|float
      */
-    public function getDailyInterestRate(int|float $interestRate, DateTime $inputDate): float|int
+    public static function getDailyInterestRate(int|float $interestRate, DateTime $inputDate): float|int
     {
         //Gets the number of days from the provided DateTime object
         $daysInMonth = (int)$inputDate->format('t');
@@ -30,7 +30,7 @@ class InterestRateCalculator
      * @param  int       $daysInvested
      * @return int|float
      */
-    public function getInvestedPeriodInterestRate(int|float $dailyInterestRate, int $daysInvested)
+    public static function getInvestedPeriodInterestRate(int|float $dailyInterestRate, int $daysInvested)
     {
         return ($dailyInterestRate * $daysInvested);
     }

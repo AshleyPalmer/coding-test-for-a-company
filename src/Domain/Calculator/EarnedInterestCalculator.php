@@ -17,11 +17,16 @@ class EarnedInterestCalculator
      * @param  int|float $interestRate
      * @return Money
      */
-    public function getEarnedInterestAmount(Money $investment, int|float $interestRate): Money
+    public static function getEarnedInterestAmount(Money $investment, int|float $interestRate): Money
     {
         $amount = $investment->getAmount();
-        $earnedAmount = (($amount / 100) * $interestRate);
+        $earnedAmount = number_format(
+            ($amount / 100) * $interestRate,
+            0,
+            '.',
+            ''
+        );
 
-        return new Money(number_format($earnedAmount, 2, '.', ''), new Currency('GBP'));
+        return new Money($earnedAmount, new Currency('GBP'));
     }
 }
