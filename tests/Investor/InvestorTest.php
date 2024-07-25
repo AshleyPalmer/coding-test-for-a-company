@@ -53,12 +53,12 @@ class InvestorTest extends TestCase
     {
         $investor->setInvestments(
             [
-                new Investment(new Loan(
+                new Investment('mock', new Loan(
                     'loan',
                     DateTime::createFromFormat('d/m/Y', '01/10/2023'),
                     DateTime::createFromFormat('d/m/Y', '15/11/2023')
                 )),
-                new Investment(new Loan(
+                new Investment('mock', new Loan(
                     'loan two',
                     DateTime::createFromFormat('d/m/Y', '13/10/2023'),
                     DateTime::createFromFormat('d/m/Y', '20/11/2023')

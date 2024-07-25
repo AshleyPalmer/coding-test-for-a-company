@@ -32,7 +32,7 @@ class InvestmentTest extends TestCase
     #[Test]
     public function test_investment_can_be_created(): Investment
     {
-        $investment = (new Investment($this->loan))
+        $investment = (new Investment('mock', $this->loan))
             ->setInvestedAmount(new Money('100000', new Currency('GBP')))
             ->setinvestmentStartDate(new DateTime('today'))
             ->setTrancheName('Mock Tranche');

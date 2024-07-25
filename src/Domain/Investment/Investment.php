@@ -10,14 +10,28 @@ use LendInvest\CodingTest\Domain\Loan\Loan;
 
 class Investment
 {
+    protected string $id;
     protected Loan $loan;
     protected ?string $trancheName;
     protected ?DateTime $investmentStartDate;
     protected ?Money $investedAmount;
 
-    public function __construct(Loan $loan)
+    public function __construct(string $id, Loan $loan)
     {
+        $this->id = $id;
         $this->loan = $loan;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

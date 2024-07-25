@@ -23,6 +23,7 @@ class InvestorService
     /**
      * Create a new Investment object
      * 
+     * @param string $id
      * @param Money    $amount
      * @param Datetime $investDate
      * @param string   $trancheName
@@ -32,6 +33,7 @@ class InvestorService
      * @return Investor
      */
     public function createInvestment(
+        string $id,
         Money $amount,
         DateTime $investDate,
         string $trancheName,
@@ -41,6 +43,7 @@ class InvestorService
         $walletService = new WalletService($this->investor->getWallet());
 
         try {
+            //find loan from 'loan database' class
             $loan = $loanPool->getLoanById($loanId);
             $tranche = $loan->getTrancheByName($trancheName);
             $trancheService = new TrancheService($tranche);
@@ -54,7 +57,7 @@ class InvestorService
                 $trancheService->deductFromTranche($amount);
                 $walletService->deductFromWallet($amount);
 
-                $investment = (new Investment($loan))
+                $investment = (new Investment($id, $loan))
                     ->setinvestmentStartDate($investDate)
                     ->setTrancheName($tranche->getName())
                     ->setInvestedAmount($amount);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LendInvest\CodingTest\Domain\Investor;
 
+use InvalidArgumentException;
 use LendInvest\CodingTest\Domain\Wallet\Wallet;
 use LendInvest\CodingTest\Domain\Investment\Investment;
 
@@ -74,6 +75,24 @@ class Investor
     public function getInvestments(): ?array
     {
         return $this->investments;
+    }
+
+    /**
+     * Get Investment By ID
+     * 
+     * @param string $id
+     * @return Investment
+     */
+    public function getInvestmentById(string $id): Investment
+    {
+        /** @var Investment $investment */
+        foreach ($this->investments as $investment) {
+            if ($investment->getId() === $id) {
+                return $investment;
+            }
+        }
+
+        throw new InvalidArgumentException(sprintf('No Investment exists with the ID %s.', $id));
     }
 
     /**
