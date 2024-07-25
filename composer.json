@@ -24,7 +24,7 @@
     "scripts": {
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "test": "phpunit",
+        "test": "vendor/bin/phpunit tests/",
         "phpmd-full": "phpmd src text cleancode,codesize,controversial,design,unusedcode"
     }
 }
