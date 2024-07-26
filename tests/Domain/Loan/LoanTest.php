@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\LendInvest\CodingTest\Domain\Loan;
+namespace Test\LendInvest\CodingTest\Domain\Loan;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\Test;

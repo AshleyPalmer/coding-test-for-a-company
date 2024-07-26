@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\LendInvest\CodingTest\Domain\Investor;
+namespace Test\LendInvest\CodingTest\Domain\Investor;
 
 use DateTime;
 use Money\Money;

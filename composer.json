@@ -11,8 +11,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Lendinvest\\CodingTest\\": "src/",
-            "Tests\\Lendinvest\\CodingTest\\": "tests/"
+            "LendInvest\\CodingTest\\": "src/",
+            "Test\\LendInvest\\CodingTest\\": "tests/"
         }
     },
     "authors": [

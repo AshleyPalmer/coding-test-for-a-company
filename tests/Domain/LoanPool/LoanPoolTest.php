@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\LendInvest\CodingTest\Domain\LoanPool;
+namespace Test\LendInvest\CodingTest\Domain\LoanPool;
 
 use DateTime;
 use InvalidArgumentException;

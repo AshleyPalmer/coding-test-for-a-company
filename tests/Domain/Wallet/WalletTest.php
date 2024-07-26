@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\LendInvest\CodingTest\Domain\Wallet;
+namespace Test\LendInvest\CodingTest\Domain\Wallet;
 
 use Money\Money;
 use Money\Currency;
