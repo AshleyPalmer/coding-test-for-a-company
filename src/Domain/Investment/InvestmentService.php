@@ -42,6 +42,14 @@ class InvestmentService
         return $earnedForPeriod;
     }
 
+    /**
+     * Calculate Interest Rate for a given month
+     * Just requires last day of the month, or any date -
+     * uses DateTime to count total days of given month.
+     * 
+     * @param DateTime $endDate
+     * @return int|float
+     */
     private function getPeriodInterestRate(DateTime $endDate): int|float
     {
         $dailyInterestRate = $this->interestRateCalculator->getDailyInterestRate(

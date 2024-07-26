@@ -20,6 +20,13 @@ class LoanPool
         $this->loans = $loans;
     }
 
+    /**
+     * Get Loan by ID
+     * 
+     * @param string $id
+     * @return Loan
+     * @throws InvalidArgumentException
+     */
     public function getLoanById(string $id): Loan
     {
         /** @var Loan $loan */
@@ -35,7 +42,9 @@ class LoanPool
     }
 
     /**
-     *
+     * Get all Loans
+     * 
+     * @return array|Loan[]|null
      */
     public function getLoans(): ?array
     {

@@ -15,6 +15,12 @@ class TrancheService
     ) {
     }
 
+    /**
+     * Reduces investment pool amount
+     * 
+     * @param Money $amount
+     * @return Tranche
+     */
     public function deductFromTranche(Money $amount): Tranche
     {
         $this->tranche->setAvailableInvestment(
@@ -24,6 +30,13 @@ class TrancheService
         return $this->tranche;
     }
 
+    /**
+     * Validation check that the amount requested is valid for the existing tranche pool
+     * 
+     * @param Money $requestedAmount
+     * @return bool
+     * @throws InvalidArgumentException
+     */
     public function hasAmountToInvest(Money $requestedAmount): bool
     {
         if ($requestedAmount->greaterThan($this->tranche->getAvailableInvestment())) {

@@ -21,7 +21,7 @@ class LoanService
      * Creates and adds a new Tranche to the Loan
      *
      * Note: this isn't used in the unit tests, because the loans
-     * and tranches are mocked rather than built through the service functions..
+     * and tranches are initialised rather than built through the service functions..
      * But it is used in the bin/Tests.php functions
      *
      * @param  string $name
