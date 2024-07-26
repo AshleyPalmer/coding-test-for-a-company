@@ -12,8 +12,8 @@ class Tranche
     public const TRANCHE_B = 'B';
 
     protected string $name;
-    protected int $interestRate;
-    protected Money $availableInvestment;
+    protected ?int $interestRate = null;
+    protected ?Money $availableInvestment = null;
 
     public function __construct(
         string $name,
@@ -32,24 +32,11 @@ class Tranche
     }
 
     /**
-     * Set Tranche Name
-     *
-     * @param  string $name
-     * @return Tranche
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * Get Tranche Interest Rate
      *
-     * @return int
+     * @return int|null
      */
-    public function getInterestRate(): int
+    public function getInterestRate(): ?int
     {
         return $this->interestRate;
     }
@@ -70,9 +57,9 @@ class Tranche
     /**
      * Get Available Investment Amount
      *
-     * @return Money
+     * @return Money|null
      */
-    public function getAvailableInvestment(): Money
+    public function getAvailableInvestment(): ?Money
     {
         return $this->availableInvestment;
     }

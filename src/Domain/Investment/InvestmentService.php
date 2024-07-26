@@ -31,6 +31,7 @@ class InvestmentService
      * for a given period, from the investment start date
      *
      * @param Datetime $endDate
+     * @return Money
      */
     public function getEarnedAmountForPeriod(DateTime $endDate): Money
     {
@@ -46,7 +47,7 @@ class InvestmentService
      * Calculate Interest Rate for a given month
      * Just requires last day of the month, or any date -
      * uses DateTime to count total days of given month.
-     * 
+     *
      * @param DateTime $endDate
      * @return int|float
      */

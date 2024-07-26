@@ -22,7 +22,7 @@ class LoanPool
 
     /**
      * Get Loan by ID
-     * 
+     *
      * @param string $id
      * @return Loan
      * @throws InvalidArgumentException
@@ -39,15 +39,5 @@ class LoanPool
         throw new InvalidArgumentException(
             sprintf('No Loan with the ID $s exists.', $id)
         );
-    }
-
-    /**
-     * Get all Loans
-     * 
-     * @return array|Loan[]|null
-     */
-    public function getLoans(): ?array
-    {
-        return $this->loans;
     }
 }

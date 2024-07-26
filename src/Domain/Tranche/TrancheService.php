@@ -17,7 +17,7 @@ class TrancheService
 
     /**
      * Reduces investment pool amount
-     * 
+     *
      * @param Money $amount
      * @return Tranche
      */
@@ -32,7 +32,7 @@ class TrancheService
 
     /**
      * Validation check that the amount requested is valid for the existing tranche pool
-     * 
+     *
      * @param Money $requestedAmount
      * @return bool
      * @throws InvalidArgumentException

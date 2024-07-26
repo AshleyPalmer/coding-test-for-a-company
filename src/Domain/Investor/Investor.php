@@ -11,14 +11,13 @@ use LendInvest\CodingTest\Domain\Investment\Investment;
 class Investor
 {
     protected string $investorName;
-    protected ?Wallet $wallet;
-    protected ?array $investments;
+    protected ?Wallet $wallet = null;
+    protected ?array $investments = [];
 
     public function __construct(
         string $investorName,
     ) {
         $this->investorName = $investorName;
-        $this->investments = [];
     }
 
     /**

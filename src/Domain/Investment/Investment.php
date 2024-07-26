@@ -12,9 +12,9 @@ class Investment
 {
     protected string $id;
     protected Loan $loan;
-    protected ?string $trancheName;
-    protected ?DateTime $investmentStartDate;
-    protected ?Money $investedAmount;
+    protected ?string $trancheName = null;
+    protected ?DateTime $investmentStartDate = null;
+    protected ?Money $investedAmount = null;
 
     public function __construct(string $id, Loan $loan)
     {
@@ -22,16 +22,14 @@ class Investment
         $this->loan = $loan;
     }
 
+    /**
+     * Get Investment ID
+     *
+     * @return string
+     */
     public function getId(): string
     {
         return $this->id;
-    }
-
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-
-        return $this;
     }
 
     /**
@@ -88,19 +86,6 @@ class Investment
     public function getLoan(): Loan
     {
         return $this->loan;
-    }
-
-    /**
-     * Set Investment Loan
-     *
-     * @param  Loan $loan
-     * @return Investment
-     */
-    public function setLoan(Loan $loan): self
-    {
-        $this->loan = $loan;
-
-        return $this;
     }
 
     /**

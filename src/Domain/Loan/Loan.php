@@ -36,65 +36,6 @@ class Loan
     }
 
     /**
-     * Set Loan ID
-     *
-     * @param  string $id
-     * @return Loan
-     */
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
-     * Get Start Date
-     *
-     * @return DateTime
-     */
-    public function getStartDate(): DateTime
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set Loan Start Date
-     *
-     * @param  DateTime $startDate
-     * @return Loan
-     */
-    public function setStartDate(DateTime $startDate): self
-    {
-        $this->startDate = $startDate;
-
-        return $this;
-    }
-
-    /**
-     * Get Loan End Date
-     *
-     * @return Datetime
-     */
-    public function getEndDate(): DateTime
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * Set Loan End Date
-     *
-     * @param  Datetime $endDate
-     * @return Loan
-     */
-    public function setEndDate(DateTime $endDate): self
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
      * Get Loan Tranches
      *
      * @return array|Tranche[]|null
@@ -104,6 +45,13 @@ class Loan
         return $this->tranches;
     }
 
+    /**
+     * Get Loan Tranche by Name
+     *
+     * @param string $name
+     * @return Tranche
+     * @throws InvalidArgumentException
+     */
     public function getTrancheByName(string $name): Tranche
     {
         /** @var Tranche $tranche */

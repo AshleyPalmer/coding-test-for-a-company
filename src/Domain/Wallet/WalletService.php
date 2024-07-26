@@ -11,14 +11,14 @@ use LendInvest\CodingTest\Domain\Wallet\Wallet;
 class WalletService
 {
     public function __construct(
-        protected Wallet $wallet
+        private Wallet $wallet
     ) {
         $this->wallet = $wallet;
     }
 
     /**
      * Reduces Wallet amount
-     * 
+     *
      * @param Money $amount
      * @return Wallet
      */
@@ -33,7 +33,7 @@ class WalletService
 
     /**
      * Validation to check Wallet has enough money for investment
-     * 
+     *
      * @param Money $requestedAmount
      * @return bool
      * @throws InvalidArgumentException
