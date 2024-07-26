@@ -58,7 +58,7 @@ class InvestorService
                 $walletService->deductFromWallet($amount);
 
                 $investment = (new Investment($id, $loan))
-                    ->setinvestmentStartDate($investDate)
+                    ->setInvestmentStartDate($investDate)
                     ->setTrancheName($tranche->getName())
                     ->setInvestedAmount($amount);
 

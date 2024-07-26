@@ -36,7 +36,7 @@ class InvestmentTest extends TestCase
     {
         $investment = (new Investment('mock', $this->loan))
             ->setInvestedAmount(new Money('100000', new Currency('GBP')))
-            ->setinvestmentStartDate(new DateTime('today'))
+            ->setInvestmentStartDate(new DateTime('today'))
             ->setTrancheName('Mock Tranche');
 
         $this->assertInstanceOf(Investment::class, $investment);
@@ -50,7 +50,7 @@ class InvestmentTest extends TestCase
     {
         $investment
             ->setInvestedAmount(new Money('100000', new Currency('GBP')))
-            ->setinvestmentStartDate(new DateTime('today'))
+            ->setInvestmentStartDate(new DateTime('today'))
             ->setTrancheName('Mock Tranche');
 
         $this->assertEquals('100000', $investment->getInvestedAmount()->getAmount());

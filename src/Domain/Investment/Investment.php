@@ -48,7 +48,7 @@ class Investment
      * @param  Datetime $startDate
      * @return Investment
      */
-    public function setinvestmentStartDate(DateTime $startDate): self
+    public function setInvestmentStartDate(DateTime $startDate): self
     {
         $this->investmentStartDate = $startDate;
 

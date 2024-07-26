@@ -40,7 +40,7 @@ class InvestmentServiceTest extends TestCase
             );
 
         $this->mockInvestment1 = (new Investment('mock', $this->loan))
-            ->setinvestmentStartDate(
+            ->setInvestmentStartDate(
                 DateTime::createFromFormat('d/m/Y', '03/10/2023')
             )
             ->setInvestedAmount(
@@ -49,7 +49,7 @@ class InvestmentServiceTest extends TestCase
             ->setTrancheName(Tranche::TRANCHE_A);
 
         $this->mockInvestment3 = (new Investment('mock', $this->loan))
-            ->setinvestmentStartDate(
+            ->setInvestmentStartDate(
                 DateTime::createFromFormat('d/m/Y', '10/10/2023')
             )
             ->setInvestedAmount(
@@ -78,7 +78,7 @@ class InvestmentServiceTest extends TestCase
     public function test_should_throw_exception_for_bad_tranche(): void
     {
         $mockInvestment = (new Investment('mock', $this->loan))
-            ->setinvestmentStartDate(
+            ->setInvestmentStartDate(
                 DateTime::createFromFormat('d/m/Y', '03/10/2023')
             )
             ->setInvestedAmount(
