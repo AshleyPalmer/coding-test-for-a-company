@@ -26,3 +26,7 @@ I have created a single Test.php executable file in the `bin/` dir that should r
 
 To run the Unit tests, I have created a composer script so that can be done via `> composer test`,
 or manually with `> vendor/bin/phpunit tests`.
+
+### Example output
+
+![composer test](unit-test-result.png)
