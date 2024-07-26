@@ -41,4 +41,13 @@ class TrancheServiceTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $trancheService->hasAmountToInvest($requestAmount);
     }
+
+    #[Test]
+    public function test_deduct_from_tranche(): void
+    {
+        $requestAmount = new Money('50000', new Currency('GBP'));
+        $trancheService = new TrancheService($this->tranche);
+        $this->tranche = $trancheService->deductFromTranche($requestAmount);
+        $this->assertEquals($requestAmount, $this->tranche->getAvailableInvestment());
+    }
 }
